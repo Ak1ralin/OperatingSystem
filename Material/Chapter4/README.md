@@ -10,20 +10,20 @@
   - Reduces process creation overhead 
     - process creation = heavy-weight, while thread creation = light-weight.
 
-![Share memory model](appendix\ShareMemoryModel.png)
+![Share memory model](appendix/ShareMemoryModel.png)
 
 
 ## Single-threaded vs. Multithreaded Processes
 - **Single-threaded process**: Only one thread of execution.
 - **Multithreaded process**: Multiple threads executing simultaneously within the same process.
 
-![ThreadType](appendix\ThreadType.png)
+![ThreadType](appendix/ThreadType.png)
 
 ## Thread Creation & Termination
 - Threads can be created dynamically and execute independently (may create other threads).
 - No strict hierarchy among threads; all are equal.
   
-![ThreadFlow](appendix\ThreadFlow.png)
+![ThreadFlow](appendix/ThreadFlow.png)
 
 ## Thread Scheduling
 - CPU schedules threads similarly to processes.
@@ -36,11 +36,11 @@
 - **Data Parallelism**: The same operation on distributes subset of data sets (GPU).
 - **Task Parallelism**: Different operations performed in parallel.
 
-![Concurrency vs Parallelism](appendix\ConcurrencyParallelism.png)
+![Concurrency vs Parallelism](appendix/ConcurrencyParallelism.png)
 
-![Thread Overlap](appendix\ThreadOverlap.png)
+![Thread Overlap](appendix/ThreadOverlap.png)
 
-![Thread Performance](appendix\ThreadPerformance.png)
+![Thread Performance](appendix/ThreadPerformance.png)
 ## Threading Issues
 ### User Threads vs. Kernel Threads
 - **User Threads**: Managed at the user level threads library (e.g., Pthreads, Java threads).

@@ -21,7 +21,7 @@ An operating system executes multiple types of programs:
 - **Program** becomes process when executable file is loaded into memory.
 - One program can be several processes (multiple user run same program).
 
-![Process in memory](appendix\ProcessInMemory.png)
+![Process in memory](appendix/ProcessInMemory.png)
 
 ## Process State/ Process life cycle
 A process can exist in different **states**:
@@ -31,7 +31,7 @@ A process can exist in different **states**:
 - **Ready**: Waiting for processor assignment (queueing).
 - **Terminated**: Finished execution.
 
-![Prcess Life Cycle](appendix\ProcessLifeCycle.png)
+![Prcess Life Cycle](appendix/ProcessLifeCycle.png)
 
 ## Process Control Block (PCB)/Task control block
 Each process is represented by a PCB (Information associated with each process), which contains:
@@ -52,7 +52,7 @@ To **maximize CPU utilization** and ensure efficient task execution, process sch
 - **Device queue**: Processes waiting for I/O operations.
 - Processes migrate between these queues based on scheduling needs.
 
-![Queuing Diagram](appendix\QueuingDiagram.png)
+![Queuing Diagram](appendix/QueuingDiagram.png)
 
 ## Scheduling Types
 - **Process scheduler**: Select among available processes for next execution on CPU.
@@ -158,7 +158,7 @@ Buffer Size
   - **Stub**: Dummy procedure in client and server
     - **Client Stub**: parameter marshalling (packing parameters to network representation (XDR))
     - **Server Stub**: send parameters to real procedure and send result back to client
-![RPC](appendix\RPC.png)
+![RPC](appendix/RPC.png)
 - **Pipes**: Acts as a conduit allowing two processes to communicate.
   - **Ordinary Pipes**: Unidirectional and requires a parent-child relationship.
   - **Named Pipes**: Bidirectional and does not require a parent-child relationship.

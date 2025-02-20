@@ -47,7 +47,7 @@ Semaphore **S** - interger variable (only accessed via two operations below)
   - `signal(S)`: Increments S -> wakes up a waiting process.
 - Used in **producer-consumer, reader-writer problems**.
 
-![Semaphore](appendix\Semaphore.png)
+![Semaphore](appendix/Semaphore.png)
 
 #### Semaphore implementation
 Each semaphore there is an associated waiting queue (instead of using **queue**)
@@ -80,7 +80,7 @@ signal (semaphore *s) {
 ### Deadlocks & Starvation
 - **Deadlock**: Two or more processes are waiting indefinitely.
 
-![Deadlock](appendix\Deadlock.png)
+![Deadlock](appendix/Deadlock.png)
 
 - **Starvation**: Process never be removed from the semaphore queue.
 - **Priority Inversion**: Lower priority hold lock, higher priority get CPU.

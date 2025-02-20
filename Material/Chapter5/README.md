@@ -47,7 +47,7 @@ CPU scheduling take place when process changing their state.
    - swiching to user mode
    - jumping to the proper location in the user program to restart that program.
 - **Dispatch latency**: time take for dispatcher to stop one process and start anothers process.
-![Dispatch Latency](appendix\DispatchLatency.png)
+![Dispatch Latency](appendix/DispatchLatency.png)
 
 ## Scheduling Criteria
 - **CPU Utilization**: **% of time** the CPU is executing. (Maximize)
@@ -66,14 +66,14 @@ CPU scheduling take place when process changing their state.
 - Non-preemptive.
 - Order effect -> average waiting time (Convoy effect)
 - Simple but lead to **convoy effect** (long processes delay short ones).
-![Convoy Effect](appendix\ConvoyEffect.png)
+![Convoy Effect](appendix/ConvoyEffect.png)
 
 ### **2. Shortest Job First (SJF)**
 - Selects the process with the shortest CPU burst.
 - Optimal in **minimizing waiting time** but may lead to **starvation** (long burst waits for short ones).
 - **Preemptive SJF** (Shortest Remaining Time First) allows interruption for a shorter job.
 - Hard to implement -> how to predict burst time? -> based on previous ones
-![SJF](appendix\SJF.png)
+![SJF](appendix/SJF.png)
 ### **3. Priority Scheduling**
 - SJF is priority where priority is inverse of predicted next CPU burst time.
 - SJF not general enough + hard to implement + overhead to predict -> priority based scheduling.
