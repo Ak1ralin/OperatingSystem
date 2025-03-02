@@ -99,7 +99,8 @@ signal (semaphore *s) {
 - signal ... wait
 - wait ... wait
 - omitting of either wait or signal
-
+- 
+![Incorrect  use of semaphore](appendix/IncorrectUse.png)
 ### Synchronization in Operating Systems
 - **Linux Synchronization Tools**:
   - **Atomic operations**
