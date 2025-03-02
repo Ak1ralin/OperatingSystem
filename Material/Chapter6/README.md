@@ -43,7 +43,7 @@ Semaphore **S** - interger variable (only accessed via two operations below)
 - **Counting Semaphore**: Unrestricted domain.
 - **Binary Semaphore**: Restricted domain (0 or 1) similar to mutex locks. 
 - Atomic operations:
-  - `wait(S)`: Wait if S $\leq$ 0, then decrements S.
+  - `wait(S)`: if S $\leq$ 0 wait ,then decrements S.
   - `signal(S)`: Increments S -> wakes up a waiting process.
 - Used in **producer-consumer, reader-writer problems**.
 
