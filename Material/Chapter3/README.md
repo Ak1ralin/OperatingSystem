@@ -81,7 +81,7 @@ A context switch occurs when the CPU transitions from one process to another, fo
 - **Resource sharing**: Processes can share **all, some, or none** of the parent’s resources.
 - **Execution**: Parent and child execute concurrently, but parent waits until children terminate.
 - **Termination**: A process ends when it completes execution or is terminated by the OS (`exit()`), then resource are deallocated by OS.
-  - `wait()` : parent check their child status, if no this zombie might occur.
+  - `wait()` : parent check their child status, if absent this part zombie might occur.
   - `abort()` : parent terminate their child.
   - `cascading termination` : in some OS , parent dead -> child dead
   - **Zombie** : process that already dead, but data still in memory (cant kill).
