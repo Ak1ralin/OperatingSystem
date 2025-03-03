@@ -47,7 +47,7 @@ Each process is represented by a PCB (Information associated with each process),
 
 ## Process Scheduling
 To **maximize CPU utilization** and ensure efficient task execution, process scheduling involves:
-- **Job queue**: All system processes.
+- **Job queue**: Processes in new state (submitted but not ready yet).
 - **Ready queue**: Processes in main memory, ready to execute.
 - **Device queue**: Processes waiting for I/O operations.
 - Processes migrate between these queues based on scheduling needs.
