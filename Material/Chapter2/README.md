@@ -106,6 +106,8 @@ Library API: ใช้เมื่อ ต้องการให้โค้ด
 
 - **Performance Tuning**:
   - Uses `trace listing` and `profiling` for analysis.
+  - trace listing : log file, save เหตุผลการณ์ว่าเกิดอะไรขึ้นเพื่อติดตามปัญหาในโปรแกรม
+  - profiling : แยกโปรแกรมเป็น section, track ว่าส่วนไหนใช้เวลามากสุดเพื่อ identify bottleneck
   - Identifies bottlenecks and remove it to improve performance.
   - Uses system monitors (e.g., Task Manager, `top` command) for optimization.
 
