@@ -39,7 +39,7 @@ Operating systems vary based on computing needs:
 - **Interrupt vector**: use to control the interrupt service routine(ISR).
 - **Trap/Exception**: software-generated interrupt caused either by an error or a user request.
 - **Interrupt Handling** OS preserves the state of CPU by register and program counter.
-  - 2 types of interrupt : **polling** and **vectored interrupts**
+  - 2 types of interrupt system : **polling** and **vectored interrupts**(more efficient)
 - **Dual-Mode Operation**: allow OS to protect itself and other system components.
   - **Mode bit** - provided by hardware to OS for determining current mode of operation.
   - **User Mode** – Normal mode (will automatically switch to kernel mode after execute system call).
