@@ -43,6 +43,7 @@ Operating systems provide a set of essential services (environment) for users an
 - **Portability** : APIs allow software to be cross-platform without modification, different OS have different system calls.
 
 System Call: ใช้เมื่อ ต้องการควบคุม OS โดยตรง, เช่น เขียน OS, ทำงานกับ Kernel, หรือเขียนโปรแกรมที่ต้องเข้าถึงทรัพยากรระดับต่ำ
+
 Library API: ใช้เมื่อ ต้องการให้โค้ดอ่านง่าย, ดูแลรักษาง่าย, และรองรับหลาย OS
 
 ### System Call Parameter Passing
@@ -70,8 +71,10 @@ Library API: ใช้เมื่อ ต้องการให้โค้ด
   - **Lowest-level** : **assembly** for assigning HW.
   - **Main body** : **C** connecting assembly to other.
   - **System programs** : **C,C+,sripting languages like PEARL, Python, Shell Script**
-- High-level languages improve portability and readability but may reduce performance 
-(Assembly ยึดติดกับ HW มากเกินไปหากมีการเปลี่ยน HW อาจจะต้องเขียนโค้ดใหม่หมด ขณะที่ Higher level มี compiler สามารถแปลงไป cross platform ได้ง่ายมากกว่า).
+- High-level languages improve portability and readability but may reduce performance
+  
+(Assembly ยึดติดกับ HW มากเกินไปหากมีการเปลี่ยน HW อาจจะต้องเขียนโค้ดใหม่หมด ขณะที่ Higher level มี compiler สามารถแปลงไป cross platform ได้ง่ายมากกว่า)
+
 (Higher level อ่านง่ายกว่าทำให้ dev and maintain ง่ายด้วยรวมทั้งยังมีเครื่องมือช่วยเยอะ)
 - **Emulation** can allow an OS to run on non-native hardware.
 
