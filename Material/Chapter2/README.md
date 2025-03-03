@@ -13,6 +13,8 @@ Operating systems provide a set of essential services (environment) for users an
 - **I/O Operations**: Manages input/output devices and file operations.
 - **File-System Manipulation**: Handles file (create, delete, read, write, search), permission management, and storage.
 - **Communications**: Enables process communication via shared memory (within) or message passing (among).
+    - Shared memory : ไว ，รองรับข้อมูลขนาดใหญ่ แต่เนื่องจากเข้าถึง memory เดียวกันทำให้ต้อง deal เรื่อง synchronization -> race condition
+    - Message passing : ช้ากว่า, ข้ามเครื่องได้ ปลอดภัยและเสถียรมากกว่า
 - **Error Detection**: Identifies and corrects system errors.
 - **Resource Allocation**: Distributes CPU, memory, and I/O resources among processes.
 - **Accounting**: Tracks resource usage for each users.
