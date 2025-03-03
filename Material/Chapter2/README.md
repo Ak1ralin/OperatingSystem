@@ -42,6 +42,9 @@ Operating systems provide a set of essential services (environment) for users an
 - **Simplicity** : API provide user-friendly function that abstract complex system calls.
 - **Portability** : APIs allow software to be cross-platform without modification, different OS have different system calls.
 
+System Call: ใช้เมื่อ ต้องการควบคุม OS โดยตรง, เช่น เขียน OS, ทำงานกับ Kernel, หรือเขียนโปรแกรมที่ต้องเข้าถึงทรัพยากรระดับต่ำ
+Library API: ใช้เมื่อ ต้องการให้โค้ดอ่านง่าย, ดูแลรักษาง่าย, และรองรับหลาย OS
+
 ### System Call Parameter Passing
 - Parameters passed using: both **Registers** and **Stack-based methods** do not limit the number or length of parameters.
   - **Registers** params stored in a block, or table in memory pass address as param.
@@ -57,7 +60,8 @@ Operating systems provide a set of essential services (environment) for users an
 ### Policy vs. Mechanism
 - **Policy (นโยบาย)**: **What** should be done.
 - **Mechanism (ทำอย่างไร)**: **How** it should be implemented.
-- **Separation of policy from mechanism** allows maximum flexibility, isolate we can change either one.
+- **Separation of policy from mechanism** allows maximum flexibility, isolate we can change either one. เช่น แก้ scheduling policy โดยไม่แก้ context switching mechanism
+- **Portability and Adapability** ปรับแต่งได้ง่ายและรองรับการใช้งานกับระบบอื่นได้ง่ายขึ้น เช่นใช้ Energy-Aware Scheduling Policy ในโทรศัพท์
 
 ### Implementation
 - Early OSes: Written in **assembly language**.
@@ -66,7 +70,9 @@ Operating systems provide a set of essential services (environment) for users an
   - **Lowest-level** : **assembly** for assigning HW.
   - **Main body** : **C** connecting assembly to other.
   - **System programs** : **C,C+,sripting languages like PEARL, Python, Shell Script**
-- High-level languages improve portability but may reduce performance.
+- High-level languages improve portability and readability but may reduce performance 
+(Assembly ยึดติดกับ HW มากเกินไปหากมีการเปลี่ยน HW อาจจะต้องเขียนโค้ดใหม่หมด ขณะที่ Higher level มี compiler สามารถแปลงไป cross platform ได้ง่ายมากกว่า).
+(Higher level อ่านง่ายกว่าทำให้ dev and maintain ง่ายด้วยรวมทั้งยังมีเครื่องมือช่วยเยอะ)
 - **Emulation** can allow an OS to run on non-native hardware.
 
 ## Operating System Structures
