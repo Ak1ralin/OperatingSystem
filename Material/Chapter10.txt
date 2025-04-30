@@ -1,0 +1,61 @@
+File system : software ช่วยจัดการไฟล์ -> เก็บยังไง/ดึงยังไง ในรูปแบบของไฟล์ คล้าย DBMS
+
+File Attributes : Meta Data เก็บใน dir file : Something นอกเหนือจาก content : used to บรรยาย File เช่น name,identifier,type,location,size,protection,time,date,user identification
+
+File Operation : Create, Write, Read, Seek (เลื่อนตำแหน่ง), Delete, Truncate （ตัด content）, Open = หาใน dir file (disk -> mem), Close (mem -> disk)
+ในการ openfile ก็ต้องใช้ข้อมูลหลายอย่าง 
+    Openfile-table : track open files 
+    File pointer : last read/write location
+    File-open count : count of number of times a file is open
+    Disk Location of the file : cache of data access info
+    Access right : access mode information
+
+File Structure : กำหนดโดย OS, Program
+    None : ไม่มี structure -> sequence of words, bytes : raw file
+    Simple record stucture : 
+        Lines (มีการขึ้นบรรทัดใหม่ชัดเจน , .txt), Fix length (ทุก record ขนาดเท่ากัน), Variable length (record มีขนาดไม่เท่ากัน)
+    Complex structure :
+        Formatted document (.docx มีสไตล์ font ฝังอยู่ด้วย), Relocatable load file (.exe, .obj)
+
+Access method : 
+    Sequential Access (seek by bytes) : read next, write next , reset : read next = read cp; cp = cp+1; อ่านแล้วไปต่อ 
+    Random Access (seek by blocks) : read n, write n, position to n, read next, write next, rewrite n : n = relative block number
+
+เมื่อ file ใหญ่เราจะสร้าง index เพื่อ performance ในการหาตำแหน่ง, ถ้าขนาดใหญ่เกินเราก็จะสร้าง index file แทน
+index file : เร็ว + เล็ก ใน RAM , relative file (ใหญ่ ใน Disk)
+
+https://chatgpt.com/share/680f9b8c-a4d4-8011-af2b-fac8927670df
+Disk Structure : can be subdivided into partition -> can treat as RAID to protect failure
+Disk แบ่งเป็น partition ได้ เราเอาหลาย disk หรือ partition มาต่อกัน -> RAID เพื่อป้องกัน failure
+FileSystem เอาไปแปะลงกับ disk หรือ partition หรือ RAID ทำให้ได้ Volume = พร้อมใช้งาน, ไม่แปะก็เป็น raw (sequence of block)
+แล้วเราจะรู้ได้ไงว่าแต่ละ Volume เป็นไฟล์ system อะไร -> มี metadata ซ่อนอยู่คอยบอก
+Mount คือเอา volume เชื่อมกับ tree folder 
+
+Directory : ไฟล์ที่ใช้บอกไฟล์อยู่ที่ไหน Map filename -> file number : แก้ Naming & Grouping Problem, เพิ่ม efficiency
+    การลบ = ลบ index from dir file, จะถูกลบจริงๆ เมื่อ content ถูกเขียนทับ
+    one-level : ทุกไฟล์อยู่ด้วยกัน -> มี Naming + Grouping Problem, root/<file>
+    two-level : master file directory (รวม user) ชี้ไป user file directory (ทำให้ได้ name space ที่แตกต่างกัน แก้ Naming Problem)
+        Path name : root/<user>/<file> 
+        Can have same file name for different users
+        Efficient searching but still grouping problem เพราะยังมีแค่ 2-level, user เดียวกันก็แยกอีกไม่ได้แล้ว
+    tree-structure directory : infinite level : no grouping problem
+        path name : absolute or relative (from current dir)
+        shared subdirectory and file : aliasing 
+        link : another name (pointer) to an existing file
+            - hardlink : สร้างอีกชื่อให้ไฟล์ : ทำได้ต่อเมื่ออยู่ same partition
+            - softlink : สร้างไฟล์พิเศษชี้ไปอีกไฟล์ต้นทาง : ข้าม partition ได้
+    
+File system mounting : file system must be mounted before it can be accessed
+    unmounted file system is mounted at a mount point : ต่อภายใต้ root กลายเป็น directory
+
+Protection : Read, Write, Execute, Append, Delete, List
+    mode of access : read, write, Execute
+    Unix/Linux three classes of user : owner, group, public : each have RWX bit 
+    chmod 761 file_name : 111 110 001 : owner can do RWX, group ca n do RW, public can do X
+    chmod o+w file_name : add write permission to public, o มาจากคำว่า other, u = user, g = group , a = all , ug+rw = เพิ่ม rw ให้ user and group
+    drwxrwxrwx : d mean directory file else -rwxrwxrwx
+
+FUSE : file-system in userspace : ตัวช่วยในการ implement file system
+    แทนที่จะเขียน driver ใส่เข้าใน kernel (ยาก), เราให้ kernel มา call code เราแทน
+    call fuse file system -> kernel detect ได้ว่าเป็นไฟล์ fuse -> FUSE -> user-code (VFS)
+

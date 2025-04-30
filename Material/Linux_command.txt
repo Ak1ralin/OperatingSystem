@@ -1,0 +1,67 @@
+command "cat" : แสดง content ในไฟล์ สามารถใช้มาสร้างไฟล์ เขียนเพิ่มได้
+basic : cat <filename> : show content in filename
+multiple file : cat <file1> <file2> <file3>
+one command : cat a b c : show content in file a b c 
+multiple command separate with ";" :  cat a ; cat b ; cat c 
+create file : cat > <file_name> ถ้าไม่มีจะสร้าง ถ้ามีจะเขียนทับ ctrl + d บอกว่าทำเสร็จแล้ว
+write more : cat >> <file_name> ถ้าไม่มีจะสร้าง ถ้ามีจะเขียนต่อ
+
+command "cal" : โชว์ calendar
+basic : cal : current month
+one param : cal <year> : show all year
+two param : cal <month> <year> : show specific month of specific year
+
+command "wc" : นับ
+basic : wc <file_name> : บรรทัด คำ char
+only line : wc -l <file_name> : บรรทัด <file_name>
+only word : wc -w <file_name> : คำ <file_name>
+only char : wc -c <file_name> : char <file_name> รวม 
+2 option : wc -lw ได้ทั้ง บรรทัด คำ <file_name>
+No param : wc : จะให้เราป้อนเอง
+
+command "head" : แสดงข้อมูลใน file
+basic : head <file_name> :  10 บรรทัดแรก
+1 param : head -5 <file_name> :  5 บรรทัดแรก
+
+command "tail" : แสดงข้อมูลใน file (ลำดับเหมือนใน file ไม่ได้ up-down)
+basic : tail <file_name> :  10 บรรทัดท้าย
+1 param : tail -5 <file_name> :  5 บรรทัดท้าย
+
+command "script" : เก็บผลลัพธ์หน้าจอไว้ในไฟล์ default เก็บใน typescript
+พิมเพื่อเริ่ม เก็บ ctrl + d เพื่อจบการเก็บ (เก็บทุกอย่าง รวมถึง บรรทัด command ด้วย)
+script -a <file_name> จะ concat ต่อท้าย file_name ถ้าไม่มีก็จะสร้าง
+script -c <command> จะเก็บผลจาก command และเริ่มเก็บ -> จะไม่มี <command> ในช่องผลลัพธ์
+
+command "ln" : สร้าง soft link, hard link , ใช้ ls -li , -i ใช้ show i_number ， แก้มีผล แต่ลบไม่ส่งผล cascade
+hard link : ตั้งอีกชื่อ : ln <old_name> <new_name> 
+soft link (symbolic link) : ln -s <old_name> <new_name> , ชี้ไป <old_name> ถ้า  old_name ถูกลบจะเปิดไม่ได้
+
+command "grep" : ใช้ค้นหา pattern รูปแบบข้อความที่เราต้องการ
+basic : grep <pattern> <file>:  cased ใหญ่เล็กต่าง
+uncased : grep -i <pattern> <file> : uncased
+ไม่เอา : grep -v <pattern> <file> : เอาทุกบรรทัดที่ไม่มี pattern
+เอาหมายเลขบรรทัดด้วย : grep -n <pattern> <file> : จะบอกบรรทัดในไฟล์ด้วย
+นับจำนวน : grep -c <pattern> <file> : นับจำนวน
+specific : grep -w <pattern> <file> : ถ้าเป๊ะ แค่ part ไม่เอา
+
+command "sort" : ใช้เรียงลำดับให้ output กับแต่ละบรรทัดของ file
+revers : sort -r <file>
+uncased : sort -f <file>
+unduplicate : sort -u <file> : ถ้าเคยมีจะไม่โชว์
+เรียงตาม number : sort -n <file> : default เรียงตาม Ascii
+เรียงตาม column ไหน : sort -k2 <file> : default เรียงตาม col1
+save output : sort -run <file> > <output> or sort -run <file> -o <output>
+
+command "touch" : สร้างไฟล์ว่าง 0 byte มีแค่ชื่อ
+
+command "mkdir" : สร้าง dir ว่าง
+
+command "find" : หาตามชื่อไฟล์และpermission
+basic : find . : show ทุกไฟล์ภายใต้ dir นี้
+name : find . -name <name> : ตามชื่อนี้
+uncased : find . -iname  <name> : แต่ไม่สน case
+สกุลไฟล์ : find . -name "*.c" : ทุกไฟล์สกุล c
+ไม่เอาชื่อนี้ :  find . ! -name <name> : ที่ไม่ใช่ชื่อนี้
+หาไฟล์ :  find . -type f
+หาdir : find . -type d
+หาตาม permission : find . -perm 666 : เฉพาะไฟล์ที่ permission 666

@@ -1,0 +1,61 @@
+File structure : ที่จัดเก็บข้อมูล, อ่าน/เขียนได้ = file
+File system : reside on secondary storage (disks) -> organized into layers
+    ให้ UI to storage, mapping logical to physical : ทำให้เข้าถึง storage ได้ง่าย
+    Efficient and convenient access to disk , data stored and retrieved easily : เก็บและดึงได้อย่างมีประสิทธิภาพ
+    In-place rewrite and random access : I/O tansfers perform in blocks of sectors (~512 bytes) 
+File control block : detailed info about a file, inode number, permissions, size, dates
+
+ข้อดีของการจัดการเป็น layer : 
+    reduce complexity and redundancy 
+    แต่ละส่วน independent แก้บางส่วนไม่ส่งผลต่อส่วนอื่นๆ 
+    ทำให้รองรับหลาย file system ได้ เพราะใช้ interface เดียวกัน, file system เดียวก็เข้าถึง HW ได้หลายอันเพราะมี interface เหมือนกัน
+ข้อเสีย : แต่ก็เพิ่ม overhead -> decrease performance
+
+File system layers : goal : logical file to physical block in disk
+    Mapping block ใน disk มาเป็น file (translating), Manage free space, disk allocation
+    Logical file system : manage meta data information : file name -> file number, dir manage, protection
+    มีการใช้งาน File organization module ： Understand files, logical address to physical blocks, manage free space, disk allocation
+    Basic file system : แปลง high-level command -> device driver command, memory buffer and cache allocation,freeing,replacement
+    Device Drivers : manage I/O device at I/O control layer : control physical device
+
+เราสามารถมีได้หลาย file system ต่อ 1 OS เพราะมี HW หลายประเภทในเครื่องที่ต้องอ่าน แต่ high-level จะคล้ายกันเพราะมี interface layer เหมือนกัน
+
+File system เริ่มต้นด้วย Boot control block contain info needed for booting OS (root partition มี OS ถูก mount ตอน boot, อันอื่นมา mount ต่อจาก root)
+-> volume control block contains volume detail ที่ mount แล้ว 
+-> ใช้ mountable (บอกว่า volume นี้ถูก mount path ไหน) ในการ เชื่อม dir -> แต่ละ volume มี dir structure ของตัวเอง -> แต่ละไฟล์มี FCB เก็บ detailed info
+
+Mounting : mount different file systems into a single hierarchy
+
+In-memory : แก้ใน Memory ก่อน ตอนปิดค่อยไปแก้ใน disk หาก dirty -> ลด I/O
+
+Virtual File System (VFS) : abstract layer provide interface ของการเข้าถึงหลาย file system , ช่วยให้สามารถใช้ same system call กับ multi-file system
+    ตัวคั่นระหว่าง user program กับ file system
+    Uniform API : ใช้ same API โดยไม่ต้องสนใจว่า file system อะไร
+    Caching and inode management : handles in-memory representation of file metadata
+    function ที่ต้องมี open(), close(), read(), write(), mmap()
+
+Directory Implementation : 2 methods
+    1. Linear List : list of file a name with pointer to the data blocks, linear search time
+    2. Hash table : อาจเกิด collision (get same hash value ซ้ำทำให้ต้องไป search ต่อ), หาไว
+
+https://chatgpt.com/c/681047bd-b268-8011-97da-ce88f939cb90
+Allocation method : how disk blocks are allocated for files
+    Contiguous allocation : file เดียวกันอยู่ต่อกัน -> Best Perf and easy to store just (start block and length)
+        ปัญหา : ที่ว่างอยู่อย่างกระจัดกระจาย ทำให้หาที่ว่างติดๆ กันไม่ได้ (fragmentation) แก้โดย Defragmentation : compack ย้ายที่ของเก่าให้ไปอยู่ติดๆ กัน
+    Linked allocation : file เดียวกันไม่ต้องอยู่ติดกัน -> ท้าย block มีชี้ไปยัง block ต่อไป จด start & end block -> ช้า
+        File-allocation table : มี block หนึ่งเก็บว่าเชื่อมกัน (sequential) ยังไงบ้าง ทำให้สามารถเข้าถึง block หลังๆ ได้รวดเร็ว ไม่ต้องค่อยๆ อ่านทีละ block แบบ sequential
+    Indexed allocation :
+        เก็บ index block พอ แล้วใน index block มี index table คล้ายๆ กับ file-allocation table (random access ไม่ใช่ sequential แบบ FAT) แต่ index block ก็ overhead
+        multi-level index : เพราะขนาด index block มีจำกัดหากไฟล์ใหญ่ index block เดียวจะไม่ไหว เลยทำให้ hierarchy
+            ปัญหา : แย่สำหรับไฟล์ขนาดเล็กเพราะต้องไปไกลทั้งที่ไม่จำเป็น
+        Single-level : Index ขนาดไฟล์จำกัด เพราะ 1 block มีขนาดแค่ 512 bytes (ขนาดจำกัด) LA/512 ได้ index ใน index block LA%512 ได้ offset ใน block
+        Linked Index Block : ขนาดไม่จำกัด -> index block มี pointer ไปยัง block ถัดไป index block ขนาดไม่จำกัด, LA ไม่หด
+        Multi-level Index Block : มี limit แต่ใหญ่มาก คือเอา offset มาหารต่อเรื่อยๆ , LA หด
+Network file system : VFS -> NFS client -> RPC/XDR -> network -> RPC/XDR -> NFS server -> VFS -> file system of server
+
+FUSE : file-system in userspace : ตัวช่วยในการ implement file system
+    แทนที่จะเขียน driver ใส่เข้าใน kernel (ยาก), เราให้ kernel มา call code เราแทน
+    call fuse file system -> kernel detect ได้ว่าเป็นไฟล์ fuse -> FUSE -> user-code (VFS)
+
+
+

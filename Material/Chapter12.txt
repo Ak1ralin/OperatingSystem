@@ -1,0 +1,64 @@
+Kernel : ตัวกลางระหว่าง SW and HW ถูกโหลดตอน boot , process ที่อยู่เสมอไม่เคยตาย
+Monolithic kernel ก็ยังสามารถเพิ่ม module ได้เช่นกันมีจุดที่ใช้เก็บ extended module อยู่
+Kernel module : Extend functionality of kernel without rebooting the system
+
+Kernel module standard format : เขียนด้วยภาษา C
+    2 functions ที่ต้องมีสำหรับ Kernel module : module_init(), module_exit()
+
+Caution : เนื่องจากเป็นโปรแกรมที่จะเพิ่มไปใน kernel ดังนั้นจะไม่มี standard C lib (printf,scanf,no debugging tool)
+    มีแต่ kernel functions เช่น printk()
+        printk(<level> "<message>", <variable> ถ้ามี %d,%s,%c )
+    <level> : KERN_INFO, KERN_WARNING, KERN_ERR, KERN_DEBUG
+
+Example module
+    #include <linux/module.h> # required
+    #include <linux/kernel.h> # for KERN_INFO
+    int init_module(void){
+        printk(KERN_INFO "Krerk module loaded\n");
+        return 0;
+    }
+    void cleanup_module(void){
+        printk(KERN_INFO "Krerk module unloaded\n");
+    }
+
+Make file : for compiling module, สร้างไฟล์ Makefile ใน same dir , แล้ว terminal -> make
+    obj-m += <filename1>.o <filename2>.o 
+    all:
+        make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+    clean:
+        make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+    
+    ทำให้ได้ filename.ko
+
+Common commands : 
+    lsmod : show status of modules in the linux kernel
+    insmod : insert module into the kernel
+        insmod <modulename.ko> <module_option>
+    rmmod : remove module from the kernel
+        rmmod [-f] [-s] [-v] [modulename.ko]
+    modprobe : add and remove modules from the kernel
+    modinfo : show information about a module
+    dmesg : print or control the kernel ring buffer
+
+Linux device : file-liked device 
+    มอง device เป็น file ใช้ file operation access, file permission ควบคุม
+    เช่น /dev/lpo : linePrinterOutput -> cat a.txt > /dev/lpo จะทำการพิม a.txt ออกมา
+    who สามารถบอกได้ว่า terminal นี้ output ผ่านไฟล์ไหน echo <msg> > dev/<path> ก็ทำให้เห็น output ได้ 
+
+ประเภทของ device
+    Character device : sending and receiving single characters, cant seek (serial/parallel port)
+        Keyboard, Mouse, Joystick, printer
+    Block device : sending and receiving blocks of data, can seek
+        Disk, USB, Camera
+
+    Major number : same major number -> same driver
+    Minor number : different minor number -> different device 
+    4 mouses = 1 major number 4 minor numbers cuz using same driver
+
+    create device : mknod <file_path> <device_type> <major> <minor>
+    flow : regiter device driver -> get major number -> create device 
+
+More about driver 
+    avoid module from being unloaded while using
+    access to module -> try_module_get(THIS_MODULE) -> lock ไม่โดน rmmod ขณะใช้งาน
+    release module -> module_put(THIS_MODULE) -> unlock

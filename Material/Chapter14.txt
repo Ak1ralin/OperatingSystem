@@ -1,0 +1,42 @@
+OS Security 
+secure ต่อเมื่อทุกอย่างถูกเข้าถึงและใช้งานได้ตามความตั้งใจ
+
+Intruders (cracker) : ผู้บุกรุก : พัง security
+Threat : potential ภัยคุกคาม อาจทำหรือไม่ทำก็ได้ : ขู่เฉยๆ
+Attack : จู่โจม ของจริง : อาจทำโดยตั้งใจ (malicious) หรือไม่ (accidental)ก็ได้
+
+ไม่มีหรอก absolute security -> แต่จะทำให้ cost ในการโจมตีสูงเฉยๆ
+
+Security มี 4 level : Physical, Application, OS, Network
+ระดับ security -> weakest point in chain -> mostly human -> phishing and social engineering
+Security ก็ควรเหมาะสม ขึ้นกับความสำคัญข้อมูล ไม่ใช่ยิ่งเยอะยิ่งดีเสมอ -> เพราะมันทำให้ Convenient ลด & cost เพิ่ม 
+
+https://chatgpt.com/share/68124e94-61d4-8011-9398-302c5df1df26
+Program Threats : 
+    Trojan Horse : พรางตัว : เหมือนจะดีแต่จริงๆ ชั่ว , เหมือนจะทำอย่างหนึ่งแต่จริงๆ แล้วทำอีกอย่าง
+        มันจะทำอะไร -> Spyware : monitoring, Ransomware : pay to unlock, กันโดย backup
+    Trap Door : Backdoor : ช่องทางลับที่ทำให้สามารถเข้าระบบได้ : เป็น Threat เมื่อถูกผู้ไม่หวังดีรู้
+    Salami Attack : By internal user (รุ่นพี่พวกกุเอง) : small add up to major attack 
+        โดนจับจากระบบยาก แต่มักถูกคนอื่นรู้จากด้านอื่นๆ เช่นพฤติกรรม
+    Malware : โปรแกรมชั่วทุกชนิด
+    KeyStroke logger : เก็บทุก input : เก็บ password, credit card
+    Viruses : ส่วนของโค้ดที่ซ่อนในโปรแกรมปกติ, self-replicating, เฉพาะกับ CPU,OS,App ยังไม่มีแบบ general
+    Worms : standalone program = automatically ทำทุกอย่าง กระจาย โดย spawn mechanism  
+        ต่างกับ viruses ตรง virus ซ่อนอยู่ในโปรแกรมอื่นต้องรอคนอื่นเปิดโปรแกรมถึงทำงานได้
+    Port scanning : ลองยิง port (randomly เพื่อไม่โดน IDS/IPSจับ) ทั้งหมด ทำให้ได้ข้อมูลที่อาจเป็นประโยชน์ต่อการโจมตี
+
+network โจมตีอาจทำได้ 2 แบบ 1. Masquerading : ปลอมตัวเป็นคนอื่น 2. Man in the middle : ดักข้อมูล/แก้ข้อมูลที่วิ่งผ่าน
+
+User authenication : พิสูจน์ตัวตน
+    วิธีหลัก password , best practice :
+        เปลี่ยนบ่อย, ไม่ reuse, เก็บ log, ส่งผ่านช่องทางปลอดภัย (email ไม่ปลอดภัย)
+        ในการเก็บใช้ hash function + add salt
+    วิธีเสริม : 
+        ใช้ OTP (one time password) ควร expired ไวๆ 30 sec - 5 min
+        Biometric : ลายนิ้วมือ มือ หน้า ตา
+    โจมตีทำได้โดย -> sniffing (ดักฟังใน network), shoulder surfing (แอบส่อง) , KeyStroke logger
+    
+Ethics :
+    1. เข้าถึง private info เฉพาะตอนจำเป็น (ในหน้าที่) เท่านั้น : minimize privilege ด้วย
+    2. ข้อมูลที่เข้าถึงได้ต้องเก็บเป็นความลับและปกป้องเป็นอย่างดี : Encrypt + Audit
+    3. เพิ่มความน่าเชื่อถือและ availability ของระบบที่รับผิดชอบ : fault tolerance -> backup

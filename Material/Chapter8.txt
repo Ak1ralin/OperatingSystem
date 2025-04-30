@@ -1,0 +1,37 @@
+Memory Management
+#Physical Memory : HW, goal=perf, vary size on machine
+#Logical Memory : OS made it, mem ใหญ่ๆ ต่อเนื่องกัน -> ทำให้ความซับซ้อนของ Memory hierarchy หายไป 
+
+Memory Hierarchy : Take advantage of locality (Temporal ใช้มาก่อน, Spatial ใกล้ๆ)
+4 segments : 
+    stack (function call/params, local variable, return addr)
+    heap (dynamic thing)
+    data (static/global variable)
+    code -> 0
+    shared library (optional)
+
+Logical Addr (virtual addr) : addr in program instruction that CPU execute -> program only deal with virtual addr
+Physical Addr (real addr) : addr used by memory unit to access physical memory
+MMU (Memory Management Unit) : logical addr -> physical addr
+
+Memory Allocation :
+- Contiguous : อาจมีปัญหาหาที่เพิ่มไม่ได้ทั้งที่มีที่เหลือ : fragmentation
+- Paging : Frame (Phy) + Page (Logi) 
+    - Frame and Page is same size power of 2 (512,1K,2K) bytes
+    - OS track all free frames
+    - แต่เนื่องจาก Frame อยู่กระจายจึงต้องมี Page Table เข้ามาเพื่อ map page->frame
+    - Page table : used to map logical addr to physical addr อยู่ main memory : ทำให้ต้อง access memory 2 รอบ -> แก้โดยใช้ TLB
+        - Logical Addr = Page Number (index of page table) + Offset (depend on page size log2(bytes)) 
+        - Page number --(index)Page table--> Frame number , ขนาด page number อาจไม่เท่า frame number ก็ได้
+    TLB ~ cache of page table -> EAT = (TLB + memory access)hit_ratio + (TLB + 2memory access)(1-hit_ratio)
+
+https://chatgpt.com/share/680df6db-5fb0-8002-82a2-9ca3753b7e9f
+Hierarchical Page Tables : Break logical space into multiple page tables , lot of pages between heap and stack is unused
+    - page table มันใหญ่เหี้ยๆ ก็เลยแก้ด้วยการทำ หลายชั้น
+    - Outer page table : เปรียบเสมือน logical
+    - Page table : contains pages of page table for only used pages
+
+   
+
+
+

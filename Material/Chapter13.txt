@@ -1,0 +1,49 @@
+Baremetal : รันซอฟต์แวร์บนเครื่องจริงๆ ไม่มีชั้นกลาง ไม่มี hypervisor ไม่มี OS
+Virtual Machine : จำลองเครื่องในเครื่องแม่อีกที ใช้ Hypervisor มาแบ่ง resource, แยก OS ได้
+Container : รันแอปแยกกันแบบเบาๆ ใช้ kernel ร่วมกับ host OS แต่แยก environment
+
+VM : เครื่องเสมือน
+    Hypervisor : ตัวกลางที่ใช้แบ่ง resource (CPU,RAM,I/O) -> VM แต่ละตัวจะส่งคำสั่งผ่าน hypervisor
+        ทำหน้าที่ จัดสรร, แปลคำสั่งvm->hw, คุม resource ให้แต่ละ VM ไม่มาทับกัน
+        ทำหน้าที่เหมือนตีหน้าเป็น hardware ปลอม ให้ OS (vm) ข้างในเห็นว่ามีของตัวเอง
+        Type 1 : Hypervisor บน HW จริง ทำหน้าที่คล้าย OS เบาๆ, ไม่มี host OS , more perf
+        Type 2 : Hypervisor บน OS ทำหน้าที่คล้าย app, มี host OS , less perf
+    Software Defined Network : รูปแบบของ Network ของ VM เพื่อคุมทุกอย่างด้วย SW เพราะ HW มีน้อย
+        Bridge : เชื่อม internet จริงๆ
+        NAT : many to one 
+        Host-only : VM เชื่อมเน็ตไม่ได้ คุยกับ host ได้อย่างเดียว
+    สร้าง resource pool : กลุ่มทรัพยากร (CPU, RAM) ที่จัดไว้ให้ VM -> decoupling จะได้ไม่แย่งกันเอง ไม่ยึดติดกับhost
+
+Containerization : วิธีแพ็คแอปกับของทุกอย่างของมันให้รันได้ที่ไหนก็ได้แบบไม่พัง -> รันเครื่องกุได้แต่รันเครื่องมึงไม่ได้
+    ที่มา : 
+        dependency hell เยอะ ต้องไปโหลดเองจาก 0  
+        version problem
+        ทำซ้ำลำบาก -> overhead 
+        environment variation
+    ช่วยยังไง กล่องสำเร็จรูปที่โยนไปไหนถ้า resource โอเคก็รันได้เหมือนเดิม 100 % + แยก env
+    ข้อดี : ง่ายในการ scale -> just copy container
+
+    dev สร้างตู้, ops ใช้ตู้
+    Dev : Build once run anywhere, isolated environment for each process  
+        code, library, pakage manager, apps, data
+        regardless of kernel version, host distro, physical/virtual/cloud but container and host architecture must match
+    Ops : Configure once run anything,significantly improve speed continuous deployment and continuous integration systems
+        logging, remote access, monitoring, network config
+        if it can run on host, it can run in container
+
+    lightweight VM : own process space, own network interface 
+    Container are isolated but share OS, bins/libraries might diff 
+        -> faster deploy, less overhead, easier migration, faster restart 
+        -> ใช้ container แทน VM ได้
+
+    ความแตกต่างชัดๆ : หาก 3 apps ใช้ OS เดียวกัน, VM ต้องสร้าง OS 3 ครั้ง, Container ใช้ OS เดียวกันได้ just create app layer
+    build -> ได้ image (packaged software), run -> ได้ container, change and update เฉพาะส่วนต่าง
+
+    
+    Docker Compose : define and run multi container : deploy with single commands
+    Container Orchestration : ระบบที่คอยควบคุม + manage container เยอะๆ แบบอัตโนมัติ
+        resource pool : Resource ทั้งหมดของทุก node(vm, pc)
+        Kubernetes : Container Orchestration ตัวหนึ่ง : เหมือน scheduler
+            เอา workload ไปวางบน node ที่เหมาะที่สุด
+
+History : Baremetal -> VM -> Cloud (VM but use others resource) -> Container -> Serverless (just code)

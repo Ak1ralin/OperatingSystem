@@ -1,0 +1,26 @@
+Virtual Memory : Provide memory space that can be much greater than physical memory. -> swap space (secondary storage), via demand paging mechanism
+
+Demand paging mechanism : bring a page into memory only when it is needed. เอาเฉพาะส่วนที่จำเป็นมาไว้ใน memory
+    Page fault (cache miss) : mechanism to implement demand paging : if ref to invalid page -> page fault interrupt -> page fault handler
+    Page fault handler :
+        1. OS decide -> invalid ref (abort) or just not in memory (continue)
+            รู้ได้ไงว่าอยู่หรือไม่อยู่ -> page table มี valid/invalid bit
+        2. Get empty frame, if no free frame just swap some out (using page replacement algorithm)
+        3. Swap page into frame
+        4. Update table (both TLB and page table)
+        5. Set valid bit in page table
+        6. Restart Instruction 
+
+Copy-on-Write : parent & child เริ่มแรกใช้ page เดียวกัน ถ้ามีการแก้ก็จะไปเพิ่มลด page ใน page table -> more efficient process creation
+
+Basic Page Replacement Algorithm : choose victim frame when no available, write victim frame to disk if dirty
+    FIFO : replace the page that has been in memory the longest -> frame เยอะ แต่ page fault กลับเยอะขึ้น -> Belady's anomaly
+    Optimal : replace page that will not be used in longest time : best one used as baseline -> เพราะ implement ไม่ได้ (cant read future)
+    LRU : replace the page that not been used for longest time 
+        Counter implement : overhead เยอะ (update + search)
+        Stack implement : double link form, page ref -> move to top, เอา bottom เป็น victim
+    Ref bit (0 mean not been used, 1 mean been used), ref bit will periodically reset, randomly pick one page with ref bit = 0 -> victim
+    Second Chance : FIFO + ref bit : ดูจากหัว queue ถ้าเป็น 1 แปลงเป็น 0 แล้วดูอันต่อไป ถ้าเป็น 0 ให้ victim, circular queue so eventually we will get victim
+    
+https://chatgpt.com/share/680dfb7a-3c2c-8002-a569-6924613a8801
+Shared pages : parent & child use same page table : logical page of multiple processes are mapped to the same physical memory frames. -> Shared library, Memory-mapped I/O, Shared memory
