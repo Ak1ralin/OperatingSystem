@@ -1,0 +1,32 @@
+Process มีกี่ part อะไรบ้าง ทำอะไร？
+Ans : text (program code), stack (temp data), data (global, static variable), heap (memory dynamically allocated)
+
+Program กับ Process ต่างกันอย่างไร?
+Ans : process เป็น program ที่ run อยู่
+
+1 Program เป็นหลาย Process ได้ไหม?
+Ans :  ได้ เมื่อ multiple user run same program
+
+Process มีกี่ state อะไรบ้าง
+Ans : 5 states , new ready running waiting terminated
+
+Scheduler ที่เรามักพูดถึงหมายถึง scheduler อะไร แล้ว scheduler อื่นมีไว้ทำไม?
+Ans : short-term scheduler, scheduler อื่นมีไว้เพื่อเพิ่ม performance 
+
+ถ้า RAM เราน้อย scheduler ที่ควรมีอีกตัวคืออะไร  เพราะอะไร?
+Ans : medium term scheduler เพราะมันทำหน้าที่ memory swapping เมื่อ RAM ไม่พอ
+
+Process Type I/O, CPU ดูจากอะไร？
+Ans : เวลาที่ใช้ในส่วนต่างๆ
+
+Context switching save และ load ข้อมูลอ้างอิงจากอะไร?
+Ans : process control block
+
+ใน Client-server system client รู้ได้อย่างไรว่าต้องเรียก server อะไร
+Ans :  ผ่าน binding server
+
+Client ได้เรียก procedure จริงๆ หรือไม่
+Ans : ไม่ client เรียก server side stub , แล้ว server side stub ค่อยเรียก procedure จริงๆ
+
+head -3 /etc/passwd | tail -1 ทำอะไร
+Ans : ให้บรรทัดที่ 3 ของfile "passwd"

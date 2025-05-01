@@ -40,6 +40,17 @@
 
 ---
 
+## Why do we said OS is interrupt driven?
+
+<details>
+  <summary>🔒 Spoiler (Click to Reveal)</summary>
+  
+  Because it will handle the problem when interrupt occurs, instead of checking all the time.
+
+</details>
+
+---
+
 ## Why must the bootstrap program be stored in ROM/EPROM?
 
 <details>
@@ -47,6 +58,16 @@
   
   Because otherwise, the data would be lost when power is cut off.
   
+</details>
+
+---
+## Why do we need dual-mode?
+
+<details>
+  <summary>🔒 Spoiler (Click to Reveal)</summary>
+  
+  To increase **security, stability, and resource control**, protect critical system resource.
+
 </details>
 
 ---

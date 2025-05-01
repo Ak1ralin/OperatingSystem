@@ -35,7 +35,8 @@ User authenication : พิสูจน์ตัวตน
         ใช้ OTP (one time password) ควร expired ไวๆ 30 sec - 5 min
         Biometric : ลายนิ้วมือ มือ หน้า ตา
     โจมตีทำได้โดย -> sniffing (ดักฟังใน network), shoulder surfing (แอบส่อง) , KeyStroke logger
-    
+
+https://chatgpt.com/share/6812fbb6-c58c-8011-9de0-675340afff10    
 Ethics :
     1. เข้าถึง private info เฉพาะตอนจำเป็น (ในหน้าที่) เท่านั้น : minimize privilege ด้วย
     2. ข้อมูลที่เข้าถึงได้ต้องเก็บเป็นความลับและปกป้องเป็นอย่างดี : Encrypt + Audit

@@ -16,7 +16,7 @@ MMU (Memory Management Unit) : logical addr -> physical addr
 
 Memory Allocation :
 - Contiguous : อาจมีปัญหาหาที่เพิ่มไม่ได้ทั้งที่มีที่เหลือ : fragmentation
-- Paging : Frame (Phy) + Page (Logi) 
+- Paging : Frame (Phy) <- Page (Logi) 
     - Frame and Page is same size power of 2 (512,1K,2K) bytes
     - OS track all free frames
     - แต่เนื่องจาก Frame อยู่กระจายจึงต้องมี Page Table เข้ามาเพื่อ map page->frame

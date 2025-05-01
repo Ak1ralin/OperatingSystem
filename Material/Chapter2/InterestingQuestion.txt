@@ -1,0 +1,29 @@
+Why use system calls instead of direct kernel access?
+Ans : user app อยู่ usermode ไม่มีสิทธิ์ทำหลายๆ อย่าง แต่ก็อยากใช้เลยสร้าง system call ขึ้นมา
+
+Why use APIs rather than system calls?
+Ans : system call ของ OS ไม่เหมือนกันการใช้ API ช่วยเพิ่ม Portablity 
+
+System call Parameter passing มีกี่แบบ แบบไหนบ้างที่ไม่จำกัดความยาว？
+Ans : 3 แบบ 1. เก็บใน register (จำกัดตามขนาด register) 2. เก็บที่อื่น register เก็บ address 3. stack based (2,3  ไม่จำกัดขนาด)
+
+Microkernel ต่างจาก Modular kernel ยังไง?
+Ans : micro แบ่งบางส่วนของ kernel มาใส่ user module , modular แบ่งออกไปที่อื่น แต่สามารถโหลดมาใส่ kernel เพิ่มได้
+
+บอกความแตกต่างของ one step boot กับ two step boot
+Ans :
+1 step : fixed location -> bootstrap loader หา Kernel โหลดเข้า memory เพื่อ execute
+2 steps : fixed location -> boot block หา bootstrap loader (อาจจะอยู่ใน disk) ค่อยหา Kernel โหลดเข้า memory เพื่อ execute
+
+Core dump และ crash dump เกิดจากอะไรบ้าง?
+Ans :
+core dump : runtime crash มักเกิดจากเราไปaccess memoryที่ผิด
+crash dump : เกิด bug ภายใน OS -> OS ล่ม
+
+Trace listing กับ profiling คืออะไร ทำอะไรได้
+Ans :
+Trace listing : บันทึกเหตุการณ์ในโปรแกรมใช้ติดตามปัญหา
+Profiling : บันทึกการใช้เวลาของส่วนต่างๆ ของโค้ด ใช้มาหา bottleneck
+
+ถ้าเราอยากดูการใช้ทรัพยากรใน linux ต้องใช้ command อะไร
+Ans : top command

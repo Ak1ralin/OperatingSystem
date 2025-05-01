@@ -1,4 +1,4 @@
-File structure : ที่จัดเก็บข้อมูล, อ่าน/เขียนได้ = file
+File: ที่จัดเก็บข้อมูล, อ่าน/เขียนได้ = file
 File system : reside on secondary storage (disks) -> organized into layers
     ให้ UI to storage, mapping logical to physical : ทำให้เข้าถึง storage ได้ง่าย
     Efficient and convenient access to disk , data stored and retrieved easily : เก็บและดึงได้อย่างมีประสิทธิภาพ
@@ -8,7 +8,6 @@ File control block : detailed info about a file, inode number, permissions, size
 ข้อดีของการจัดการเป็น layer : 
     reduce complexity and redundancy 
     แต่ละส่วน independent แก้บางส่วนไม่ส่งผลต่อส่วนอื่นๆ 
-    ทำให้รองรับหลาย file system ได้ เพราะใช้ interface เดียวกัน, file system เดียวก็เข้าถึง HW ได้หลายอันเพราะมี interface เหมือนกัน
 ข้อเสีย : แต่ก็เพิ่ม overhead -> decrease performance
 
 File system layers : goal : logical file to physical block in disk
@@ -18,9 +17,9 @@ File system layers : goal : logical file to physical block in disk
     Basic file system : แปลง high-level command -> device driver command, memory buffer and cache allocation,freeing,replacement
     Device Drivers : manage I/O device at I/O control layer : control physical device
 
-เราสามารถมีได้หลาย file system ต่อ 1 OS เพราะมี HW หลายประเภทในเครื่องที่ต้องอ่าน แต่ high-level จะคล้ายกันเพราะมี interface layer เหมือนกัน
+เราสามารถมีได้หลาย file system ต่อ 1 OS เพราะมี HW หลายประเภทในเครื่องที่ต้องอ่าน แต่ high-level จะคล้ายกันเพราะมี interface layer (VFS) เหมือนกัน
 
-File system เริ่มต้นด้วย Boot control block contain info needed for booting OS (root partition มี OS ถูก mount ตอน boot, อันอื่นมา mount ต่อจาก root)
+File system เริ่มต้นด้วย Boot control block contain info needed for booting OS (root partition ที่มี OS ถูก mount ตอน boot, อันอื่นมา mount ต่อจาก root)
 -> volume control block contains volume detail ที่ mount แล้ว 
 -> ใช้ mountable (บอกว่า volume นี้ถูก mount path ไหน) ในการ เชื่อม dir -> แต่ละ volume มี dir structure ของตัวเอง -> แต่ละไฟล์มี FCB เก็บ detailed info
 
@@ -45,7 +44,7 @@ Allocation method : how disk blocks are allocated for files
     Linked allocation : file เดียวกันไม่ต้องอยู่ติดกัน -> ท้าย block มีชี้ไปยัง block ต่อไป จด start & end block -> ช้า
         File-allocation table : มี block หนึ่งเก็บว่าเชื่อมกัน (sequential) ยังไงบ้าง ทำให้สามารถเข้าถึง block หลังๆ ได้รวดเร็ว ไม่ต้องค่อยๆ อ่านทีละ block แบบ sequential
     Indexed allocation :
-        เก็บ index block พอ แล้วใน index block มี index table คล้ายๆ กับ file-allocation table (random access ไม่ใช่ sequential แบบ FAT) แต่ index block ก็ overhead
+        เก็บ index block พอ แล้วใน index block มี index table คล้ายๆ กับ file-allocation table (แต่ random access ไม่ใช่ sequential แบบ FAT) แต่ index block ก็เป็น overhead
         multi-level index : เพราะขนาด index block มีจำกัดหากไฟล์ใหญ่ index block เดียวจะไม่ไหว เลยทำให้ hierarchy
             ปัญหา : แย่สำหรับไฟล์ขนาดเล็กเพราะต้องไปไกลทั้งที่ไม่จำเป็น
         Single-level : Index ขนาดไฟล์จำกัด เพราะ 1 block มีขนาดแค่ 512 bytes (ขนาดจำกัด) LA/512 ได้ index ใน index block LA%512 ได้ offset ใน block

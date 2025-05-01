@@ -25,7 +25,7 @@ Access method :
 index file : เร็ว + เล็ก ใน RAM , relative file (ใหญ่ ใน Disk)
 
 https://chatgpt.com/share/680f9b8c-a4d4-8011-af2b-fac8927670df
-Disk Structure : can be subdivided into partition -> can treat as RAID to protect failure
+Disk Structure : can be subdivided into partition 
 Disk แบ่งเป็น partition ได้ เราเอาหลาย disk หรือ partition มาต่อกัน -> RAID เพื่อป้องกัน failure
 FileSystem เอาไปแปะลงกับ disk หรือ partition หรือ RAID ทำให้ได้ Volume = พร้อมใช้งาน, ไม่แปะก็เป็น raw (sequence of block)
 แล้วเราจะรู้ได้ไงว่าแต่ละ Volume เป็นไฟล์ system อะไร -> มี metadata ซ่อนอยู่คอยบอก
@@ -36,7 +36,7 @@ Directory : ไฟล์ที่ใช้บอกไฟล์อยู่ท�
     one-level : ทุกไฟล์อยู่ด้วยกัน -> มี Naming + Grouping Problem, root/<file>
     two-level : master file directory (รวม user) ชี้ไป user file directory (ทำให้ได้ name space ที่แตกต่างกัน แก้ Naming Problem)
         Path name : root/<user>/<file> 
-        Can have same file name for different users
+        Can have same filename for different users
         Efficient searching but still grouping problem เพราะยังมีแค่ 2-level, user เดียวกันก็แยกอีกไม่ได้แล้ว
     tree-structure directory : infinite level : no grouping problem
         path name : absolute or relative (from current dir)
@@ -55,7 +55,4 @@ Protection : Read, Write, Execute, Append, Delete, List
     chmod o+w file_name : add write permission to public, o มาจากคำว่า other, u = user, g = group , a = all , ug+rw = เพิ่ม rw ให้ user and group
     drwxrwxrwx : d mean directory file else -rwxrwxrwx
 
-FUSE : file-system in userspace : ตัวช่วยในการ implement file system
-    แทนที่จะเขียน driver ใส่เข้าใน kernel (ยาก), เราให้ kernel มา call code เราแทน
-    call fuse file system -> kernel detect ได้ว่าเป็นไฟล์ fuse -> FUSE -> user-code (VFS)
 

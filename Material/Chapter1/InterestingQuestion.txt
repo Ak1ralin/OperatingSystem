@@ -1,0 +1,27 @@
+Why we need OS?
+Ans :  เพราะผู้ใช้ส่วนใหญ่ไม่รู้จักดีและใช้งาน HW ได้อย่างมีประสิทธิภาพ จึงจำเป็นต้องมีตัวกลางให้ผู้ใช้สามารถใช้งาน computer system ได้อย่างประสิทธิภาพ Goal : 1.ใช้งานง่าย 2.run program ช่วย user แก้ปัญหาได้ 3. ใช้ HW อย่างคุ้มค่า
+
+Computer System consist of?
+Ans : 1. HW : basic computing resource 2. OS : intermediate among HW and User 3. Application : solve user problem 4. User : people, machine, other computer (any one who use our HW)
+
+Is OS always focus on one aspect?
+Ans : No, depend on computing need โทรศัพท์จะเน้นประสิทธิภาพการใช้งานพลังงาน แต่โดยส่วนใหญ่เพื่อให้ผู้ใช้ใช้งานสะดวก
+
+Why Bootstrap Program have to store in ROM/EPROM?
+Ans : เพราะไม่งั้นข้อมูลจะหายเมื่อไฟตัด
+
+Dual-mode ใช้อะไรมาแยกแยะว่าปัจจุบันอยู่ mode อะไร?
+Ans : mode bit
+
+เราใช้อะไรมาทำการป้องกัน infinite loop?
+Ans : Timer
+
+ทำไมถึงต้องมี multiprogramming เป้าหมายของมันคืออะไร?
+Ans : เพราะ process เดียวน้อยที่จะใช้ CPU อยู่ตลอดทำให้ CPU utilization ไม่สูง จึงทำเพื่อให้ CPU utilization สูงมากขึ้น
+
+Virtual mem ช่วยอะไร ?
+Ans :  ทำให้ program สามารถ run ได้โดยไม่ต้องอยู่ใน memory โดยสมบูรณ์
+
+Emulation กับ Virtualization ต่างกันอย่างไร
+Ans : Emulation simulate hardware ขึ้นมา, virtualization ใช้  HW ตัวเดิมแต่ใช้ VMM มาช่วย manage resourceสำหรับแต่ละ OS
+

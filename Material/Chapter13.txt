@@ -41,6 +41,7 @@ Containerization : วิธีแพ็คแอปกับของทุก�
 
     
     Docker Compose : define and run multi container : deploy with single commands
+    
     Container Orchestration : ระบบที่คอยควบคุม + manage container เยอะๆ แบบอัตโนมัติ
         resource pool : Resource ทั้งหมดของทุก node(vm, pc)
         Kubernetes : Container Orchestration ตัวหนึ่ง : เหมือน scheduler
